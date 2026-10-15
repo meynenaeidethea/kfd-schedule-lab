@@ -52,4 +52,18 @@ class SessionParserTest {
             parseSession(2, "2026-10-15|EXAM|topic|K911|Ivanov,Ivanov")
         )
     }
+
+    @Test
+    fun formatsErrorsAndEscapesValues() {
+        assertEquals(
+            "line 3: invalid date \"2026-13-45\"",
+            formatRejection(
+                ParseResult.Rejected(3, RejectReason.InvalidDate("2026-13-45"))
+            )
+        )
+        assertEquals(
+            "\"A\\u000A\\\"\\\\\\u0416\"",
+            quoteValue("A\n\"\\Ж")
+        )
+    }
 }
