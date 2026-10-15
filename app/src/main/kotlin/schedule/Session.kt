@@ -2,7 +2,7 @@ package schedule
 
 import java.time.LocalDate
 
-interface Session {
+sealed interface Session {
     val date: LocalDate
     val topic: String
 }
@@ -109,7 +109,7 @@ class Exam(
             "Location must not be -"
         }
         require(this.teachers.size >= 2) {
-            "Exam requires at least two teacher"
+            "Exam requires at least two teachers"
         }
         for (teacher in this.teachers) {
             requireText(teacher)
